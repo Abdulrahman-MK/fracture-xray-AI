@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detection Result</title>
+    <style>
+        /* Center everything on the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1e293b;
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        /* Flexbox to put images side by side */
+        .image-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .image-box {
+            flex: 1 1 250px;
+            min-width: 200px;
+        }
+
+        .image-box h2 {
+            font-size: 18px;
+            color: #334155;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .image-box img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .result-details {
+            background: #f8fafc;
+            padding: 18px 20px;
+            border-radius: 12px;
+            margin: 25px 0 20px;
+            text-align: left;
+            display: inline-block;
+            min-width: 280px;
+        }
+
+        .result-details p {
+            margin: 8px 0;
+            font-size: 17px;
+            color: #0f172a;
+        }
+
+        .result-details strong {
+            color: #1e293b;
+        }
+
+        .status-detected {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        .status-clear {
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        .upload-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 28px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .upload-link:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🩻 Detection Result</h1>
+
+        <!-- Images Side by Side -->
+        <div class="image-row">
+            <div class="image-box">
+                <h2>📷 Original X‑ray</h2>
+                <img src="{{ url_for('static', filename=original_path) }}" alt="Original X-ray">
+            </div>
+            <div class="image-box">
+                <h2>🤖 AI Annotated</h2>
+                <img src="{{ url_for('static', filename=result_path) }}" alt="Annotated X-ray">
+            </div>
+        </div>
+
+        <!-- Detection details -->
+        <div class="result-details">
+            <p>
+                <strong>Detection Status:</strong>
+                {% if status == "Fracture Detected" %}
+                    <span class="status-detected">🔴 Fracture Detected</span>
+                {% else %}
+                    <span class="status-clear">🟢 No Fracture Detected</span>
+                {% endif %}
+            </p>
+            <p><strong>Confidence Score:</strong> {{ confidence }}</p>
+            <p><strong>Location (approx.):</strong> {{ location }}</p>
+        </div>
+
+        <a href="/" class="upload-link">📤 Upload another image</a>
+    </div>
+</body>
+</html>

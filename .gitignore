@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+static/uploads/
+static/results/
+*.zip
+*.pt         # optional – if you want to keep model small, you can keep it, but it's large.

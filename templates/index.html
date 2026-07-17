@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fracture Detection System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #1e293b;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #475569;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        input[type="file"] {
+            padding: 12px;
+            border: 2px dashed #94a3b8;
+            border-radius: 12px;
+            width: 100%;
+            cursor: pointer;
+            background: #f8fafc;
+            font-size: 15px;
+        }
+        input[type="file"]:hover {
+            background: #f1f5f9;
+        }
+        input[type="submit"] {
+            padding: 14px 40px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        input[type="submit"]:hover {
+            background: #1d4ed8;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            color: #b91c1c;
+            margin-top: 15px;
+        }
+        .footer-note {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🦴 Fracture Detection</h1>
+        <p class="subtitle">Upload an X‑ray image (JPG, JPEG, PNG) to detect fractures using YOLOv8</p>
+
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".jpg,.jpeg,.png" required>
+            <input type="submit" value="🔍 Detect Fracture">
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div class="footer-note">Powered by Ultralytics YOLO • Orthopedic AI</div>
+    </div>
+</body>
+</html>
